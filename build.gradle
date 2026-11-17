@@ -1,0 +1,17 @@
+// Same AGP/Gradle versions as urovo-i9100 so everything resolves from the local Gradle cache.
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.2.2'
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}

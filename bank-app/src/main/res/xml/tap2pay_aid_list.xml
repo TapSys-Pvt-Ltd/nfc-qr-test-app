@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Tap2Pay AID, category "other", works on the lock screen
+     (requireDeviceUnlock=false is mandated by spec Clause 8.2). -->
+<host-apdu-service xmlns:android="http://schemas.android.com/apk/res/android"
+    android:description="@string/service_desc"
+    android:requireDeviceUnlock="false">
+    <aid-group
+        android:category="other"
+        android:description="@string/service_desc">
+        <aid-filter android:name="F0010203030605" />
+    </aid-group>
+</host-apdu-service>

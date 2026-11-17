@@ -1,0 +1,2 @@
+rootProject.name = 'nfc-qr-test-app'
+include ':core', ':bank-app'

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="pk.paysys.tap2pay.bankapp">
+
+    <uses-permission android:name="android.permission.NFC" />
+    <!-- Optional, so phones without NFC can still install -->
+    <uses-feature android:name="android.hardware.nfc.hce" android:required="false" />
+
+    <!-- Android 11+ package visibility: lets the screen list the other apps that register the same AID -->
+    <queries>
+        <intent>
+            <action android:name="android.nfc.cardemulation.action.HOST_APDU_SERVICE" />
+        </intent>
+    </queries>
+
+    <application
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@android:style/Theme.DeviceDefault.Light.NoActionBar">
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:configChanges="orientation|screenSize|keyboardHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Tap2Pay via Raast: the POS pushes a Raast QR over NFC -->
+        <service
+            android:name=".BankHceService"
+            android:exported="true"
+            android:permission="android.permission.BIND_NFC_SERVICE">
+            <intent-filter>
+                <action android:name="android.nfc.cardemulation.action.HOST_APDU_SERVICE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.nfc.cardemulation.host_apdu_service"
+                android:resource="@xml/tap2pay_aid_list" />
+        </service>
+
+        <!-- Invisible trampoline, started by the service; asks for unlock when the phone is locked -->
+        <activity
+            android:name=".TapLaunchActivity"
+            android:exported="false"
+            android:excludeFromRecents="true"
+            android:taskAffinity="pk.paysys.tap2pay.bankapp.tap"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+    </application>
+</manifest>
