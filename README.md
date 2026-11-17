@@ -19,3 +19,9 @@ Needs JDK 17 (Gradle 7.4.2 / AGP 7.2.2) and the Android SDK.
 3. `./gradlew :core:test :bank-app:assembleDebug`
 
 The APK lands in `bank-app/build/outputs/apk/debug/bank-app-debug.apk`.
+
+## License
+
+The app source code is licensed under the GNU Affero General Public License, version 3. See [LICENSE](LICENSE).
+The bundled Inter font files in `bank-app/src/main/assets/fonts/` are licensed separately under the
+[SIL Open Font License, version 1.1](third_party/Inter-LICENSE.txt).
